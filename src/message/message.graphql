@@ -1,0 +1,16 @@
+scalar Date
+
+type Messages {
+  id: ID!
+  dateSend: Date!
+  message: String!
+  author: User!
+}
+
+type Query {
+  message: [Messages!]
+}
+
+type Mutation {
+  sendMessage(message: String!): Messages!
+}
