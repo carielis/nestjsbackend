@@ -30,10 +30,7 @@ export class AuthGuard implements CanActivate {
   }
 
   validateToken(auth) {
-    if (auth.split(' ')[0] !== 'Bearer') {
-      throw new HttpException('Invalid token', HttpStatus.FORBIDDEN);
-    }
-    const token = auth.split(' ')[1];
+    const token = auth;
     try {
       const decoded = jwt.verify(token, process.env.SECRET);
       return decoded;

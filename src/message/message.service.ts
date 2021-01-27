@@ -1,3 +1,4 @@
+import { AppGateWay } from './../app.gateway';
 import { UserEntity } from '../user/user.entity';
 import { MessageEntit } from './message.entity';
 import { Headers, Injectable, Logger } from '@nestjs/common';
@@ -12,9 +13,11 @@ export class MessageService {
     private messageRepository: Repository<MessageEntit>,
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
+    private gateway: AppGateWay,
   ) {}
 
   async getAll() {
+    await this.gateway.wss.emit();
     return await this.messageRepository.find({ relations: ['author'] });
   }
 
@@ -27,6 +30,7 @@ export class MessageService {
       message: text,
       author: user,
     });
+    await this.gateway.wss.emit('newMessage', message);
     return await this.messageRepository.save(message);
   }
 }

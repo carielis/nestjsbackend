@@ -4,12 +4,11 @@ import { AppModule } from './app.module';
 
 const port = process.env.PORT || 8000;
 async function bootstrap() {
-  
   const app = await NestFactory.create(AppModule);
   app.enableCors();
-  await app.listen(port);
+  await app.listen(port, '192.168.1.48');
 
-  Logger.log(`Server start on http:/localhost:${port}`, 'URL');
+  Logger.log(`Server start on http:/192.168.1.48:${port}`, 'URL');
   Logger.log(process.env.SECRET);
 }
 bootstrap();
