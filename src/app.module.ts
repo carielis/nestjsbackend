@@ -12,7 +12,7 @@ import { GraphQLModule } from '@nestjs/graphql';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: '192.168.1.48',
+      host: 'localhost',
       port: 5432,
       username: 'postgres',
       password: 'secret',
