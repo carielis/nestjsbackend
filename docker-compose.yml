@@ -1,17 +1,43 @@
-version: '3.1'
-
-volumes:
-  pg_project:
+version: '3.8'
 
 services:
-  pg_db:
+  nestjs:
+    container_name: nestjs
+    image: nestjs
+    environment:
+      DATABASE_URL: postgres://postgres:secret@postgres:5432/stage
+    depends_on:
+      - postgres
+    networks:
+      - backend
+    ports:
+      - 4000:4000
+    build:
+      context: ./packages/server
+      dockerfile: Dockerfile
+  postgres:
+    container_name: postgres
     image: postgres
     restart: always
     environment:
       - POSTGRES_PASSWORD=secret
       - POSTGRES_USER=postgres
       - POSTGRES_DB=stage
-    volumes:
-      - pg_project:/var/lib/postgresql/data
     ports:
-      - ${POSTGRES_PORT:-5432}:5432
+      - 5432:5432
+    networks:
+      - backend
+  react:
+    container_name: React
+    image: react
+    depends_on:
+      - nestjs
+    networks:
+      - backend
+    ports:
+      - 3000:3000
+    build:
+      context: ./packages/client
+      dockerfile: Dockerfile
+networks:
+  backend:
