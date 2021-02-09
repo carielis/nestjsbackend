@@ -45,9 +45,4 @@ export class UserController {
   registrationUser(@Body() user: UserEntity) {
     return this.userService.registrationUser(user);
   }
-
-  @Delete(':id')
-  deleteUser(@Param('id') id: string) {
-    this.userService.removeUser(id);
-  }
 }

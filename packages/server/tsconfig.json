@@ -7,9 +7,13 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "target": "es2017",
+    "typeRoots": ["./node_modules/@types"],
+    "extends": "./tsconfig.e2e.json",
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "rootDir": ".",
+    "skipLibCheck": true,
     "incremental": true
   }
 }

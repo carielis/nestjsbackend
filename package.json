@@ -11,7 +11,8 @@
       "client": "yarn workspace @chat/client start",
       "server": "yarn workspace @chat/server start:dev",
       "client-install": "yarn workspace @chat/client install",
-      "server-install": "yarn workspace @chat/server install"
+      "server-install": "yarn workspace @chat/server install",
+      "build-all" : "yarn workspace @chat/server build && yarn workspace @chat/client build"
     },
     "devDependencies": {
       

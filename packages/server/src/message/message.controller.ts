@@ -5,7 +5,6 @@ import {
   Controller,
   Delete,
   Get,
-  Logger,
   Param,
   Post,
   UseGuards,
@@ -16,16 +15,10 @@ import { UserDec } from 'src/user/user.decorator';
 
 @Controller('message')
 export class MessageController {
-  logger = new Logger('MessageController');
   constructor(private serviceMesssage: MessageService) {}
 
-  private logData(option) {
-    option.user && this.logger.log('User' + JSON.stringify(option.user));
-    option.data && this.logger.log('Data' + JSON.stringify(option.data));
-    option.id && this.logger.log('Message' + JSON.stringify(option.id));
-  }
-
   @Get()
+  @UseGuards(new AuthGuard())
   getAll() {
     return this.serviceMesssage.getAll();
   }

@@ -1,4 +1,5 @@
 {
   "collection": "@nestjs/schematics",
+  "typeRoots": ["./node_modules/@types"],
   "sourceRoot": "src"
 }
